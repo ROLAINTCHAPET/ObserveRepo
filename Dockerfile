@@ -4,7 +4,10 @@ WORKDIR /app
 
 # Copy the jar file (adjust the name to match your actual jar)
 COPY target/template-0.0.1-SNAPSHOT.jar app.jar
+# Copy OpenTelemetry agent
 COPY otel/opentelemetry-javaagent.jar /otel/opentelemetry-javaagent.jar
+
+# Start with OpenTelemetry agent
 
 
 # Or if you're using Gradle
@@ -12,4 +15,4 @@ COPY otel/opentelemetry-javaagent.jar /otel/opentelemetry-javaagent.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-javaagent:/otel/opentelemetry-javaagent.jar", "-jar", "app.jar"]

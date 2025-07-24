@@ -16,6 +16,14 @@ services:
       - LOGGING_FILE_NAME=/app/logs/application.log
       - LOGGING_PATTERN_FILE=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
       - LOGGING_LEVEL_ROOT=INFO
+        #opentelemetry
+      - OTEL_SERVICE_NAME=webflux-app
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=app,service.version=1.0.0
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://tempo:4318/v1/traces
+      - OTEL_LOGS_EXPORTER=none
     volumes:
       - app-logs:/app/logs  # Mount volume for logs
     depends_on:
