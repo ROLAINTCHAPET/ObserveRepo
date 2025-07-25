@@ -16,7 +16,7 @@ services:
       - LOGGING_FILE_NAME=/app/logs/application.log
       - LOGGING_PATTERN_FILE=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
       - LOGGING_LEVEL_ROOT=INFO
-        #opentelemetry
+      #opentelemetry
       - OTEL_SERVICE_NAME=webflux-app
       - OTEL_TRACES_EXPORTER=otlp
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
@@ -62,6 +62,17 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
+      # SMTP Configuration for Email Alerts (MOVED HERE!)
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER=rtchapetngamini@gmail.com
+      - GF_SMTP_PASSWORD=avihfivmwtwsalhz
+      - GF_SMTP_FROM_ADDRESS=rtchapetngamini@gmail.com
+      - GF_SMTP_FROM_NAME=Grafana Alerts
+      - GF_SMTP_SKIP_VERIFY=false
+      # Enable alerting
+      - GF_ALERTING_ENABLED=true
+      - GF_UNIFIED_ALERTING_ENABLED=true
     ports:
       - "3000:3000"
     volumes:

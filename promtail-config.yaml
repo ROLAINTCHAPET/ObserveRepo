@@ -9,14 +9,15 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: webflux-app
+  - job_name: spring-boot-app
     static_configs:
       - targets:
-          - localhost
+          - webflux-app
         labels:
-          job: webflux-app
+          job: spring-boot-app
           service: template
           environment: development
+          app_name: webflux-app
           __path__: /var/log/app/*.log
 
     # Parse Spring Boot logs
