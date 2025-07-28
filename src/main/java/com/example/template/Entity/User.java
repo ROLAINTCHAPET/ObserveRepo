@@ -1,15 +1,21 @@
 package com.example.template.Entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("users")  // nom de la table en base
+@Schema(description = "User entity representing a system user")
 public class User {
 
     @Id
+    @Schema(description = "Unique identifier of the user", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @Schema(description = "Name of the user", example = "John Doe", required = true)
     private String name;
+
+    @Schema(description = "Email address of the user", example = "john.doe@example.com", required = true)
     private String email;
 
     // Constructeurs
